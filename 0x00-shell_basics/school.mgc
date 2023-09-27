@@ -1,2 +1,2 @@
 #!/bin/bash
-echo 'O string SCHOOL' > school.mgc
+echo '0 string SCHOOL' > school.mgc
