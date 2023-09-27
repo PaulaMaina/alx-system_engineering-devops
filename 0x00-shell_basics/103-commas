@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -A1p | sort -d | tr 'n' ','
+ls -apvm
