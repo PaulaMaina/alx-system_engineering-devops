@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 100 with fizz, buzz, or FizzBuzz
+i=1
+while [ $i -le 100 ]
+do
+	if ! (( i%15 ))
+	then
+		echo "FizzBuzz"
+	elif ! (( i%3 ))
+	then
+		echo "Fizz"
+	elif ! (( i%5 ))
+	then
+		echo "Buzz"
+	else
+		echo $i
+	fi
+	(( i++ ))
+done
