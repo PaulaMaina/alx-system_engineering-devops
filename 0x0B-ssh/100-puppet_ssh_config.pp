@@ -1,15 +1,16 @@
 # Setup SSH configuration file
+include stdlib
 
 file_line { 'Turn off password authentication':
-  ensure  => 'present',
+  ensure  => present,
   path    => '/etc/ssh/ssh_config',
   line    => 'PasswordAuthentication no',
-  match   => 'PasswordAuthentication yes',
+  replace => true,
 }
 
 file_line { 'Configure the private key identity file':
-  ensure  => 'present',
+  ensure  => present,
   path    => '/etc/ssh/ssh_config',
   line    => 'IdentityFile ~/.ssh/school',
-  match   => '^#?\s*IdentityFile.*',
+  replace => true,
 }
