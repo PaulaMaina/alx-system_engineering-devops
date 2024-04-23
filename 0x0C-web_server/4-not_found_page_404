@@ -7,7 +7,8 @@ sudo service nginx start
 
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
-sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo echo "Hello World!" | tee /var/www/html/index.html
+sudo echo -e "Ceci n'est pas une page" | tee /var/www/html/404.html
 
 sudo chown -R "$USER":"$USER" /etc/nginx/sites-enabled
 sudo chmod -R 755 /etc/nginx/sites-enabled
@@ -26,6 +27,12 @@ sudo echo "server {
 
 	location / {
 		try_files \$uri \$uri/ =404;
+	}
+
+	error_page 404 /404.html;
+	location = /404.html {
+		root /var/www/html;
+		internal;
 	}
 }" | sudo tee /etc/nginx/sites-enabled/default
 
