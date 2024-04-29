@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Congiures a brand new Ubuntu machine
-sudo apt -y update
-sudo apt -y install nginx
+sudo apt-get  update
+sudo apt-get -y install nginx
 sudo service nginx start
 sudo ufw allow 'Nginx HTTP'
 sudo sed -i "12i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
