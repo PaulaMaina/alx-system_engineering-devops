@@ -1,6 +1,6 @@
 # Custom HTTP header response script
 exec { 'update':
-  command  => 'sudo apt -y update',
+  command  => 'sudo apt-get update',
   provider => shell,
 }
 -> package {'nginx': 
