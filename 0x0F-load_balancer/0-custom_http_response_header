@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Congiures a brand new Ubuntu machine
+sudo apt -y update
+sudo apt -y install nginx
+sudo service nginx start
+sudo ufw allow 'Nginx HTTP'
+sudo sed -i "12i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
+sudo nginx -t
+sudo service nginx restart
