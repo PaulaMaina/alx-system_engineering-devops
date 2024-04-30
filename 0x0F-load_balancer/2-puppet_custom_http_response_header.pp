@@ -1,16 +1,30 @@
-# Custom HTTP header response script
-exec { 'update':
-  command  => 'sudo apt-get update',
-  provider => shell,
+# Setup New Ubuntu server with nginx
+# and add a custom HTTP header
+
+exec { 'update system':
+        command => '/usr/bin/apt-get update',
 }
--> package {'nginx': 
-  ensure   => present,
-  path     => '/etc/nginx/sites-available/default',
-  line     => "location / {
-  add_header X-Server-By ${HOSTNAME};",
-  match    => '^\tlocation / }',
+
+package { 'nginx':
+	ensure => 'installed',
+	require => Exec['update system']
 }
--> exec { 'restart service':
-  command  => 'sudo service nginx restart',
-  provider => shell,
+
+file {'/var/www/html/index.html':
+	content => 'Hello World!'
+}
+
+exec {'redirect_me':
+	command => 'sed -i "24i\	rewrite ^/redirect_me https://th3-gr00t.tk/ permanent;" /etc/nginx/sites-available/default',
+	provider => 'shell'
+}
+
+exec {'HTTP header':
+	command => 'sed -i "25i\	add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
+	provider => 'shell'
+}
+
+service {'nginx':
+	ensure => running,
+	require => Package['nginx']
 }
