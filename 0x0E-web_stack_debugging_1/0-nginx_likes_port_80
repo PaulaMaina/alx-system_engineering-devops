@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Configures an Nginx server
-sed -i -e 's/8080/80/g' /etc/nginx/sites-enabled/default
-service nginx start
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
