@@ -14,8 +14,9 @@ if __name__ == "__main__":
         user_id = user.get('id')
         username = user.get('username')
         url = "https://jsonplaceholder.typicode.com/users/{}".format(user_id)
-        task_url = url + '/todos'
-        tasks = req.json()
+        task_url = url + '/todos/'
+        task_req = requests.get(task_url)
+        tasks = task_req.json()
         users_dict[user_id] = []
         for task in tasks:
             task_completed_status = task.get('completed')
