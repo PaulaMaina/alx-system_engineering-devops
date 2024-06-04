@@ -6,7 +6,7 @@ import requests
 
 
 def top_ten(subreddit):
-    """Prints the top ten posts"""
+    """Returns the total number of subscribers"""
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {
         "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
